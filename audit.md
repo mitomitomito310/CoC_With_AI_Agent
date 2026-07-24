@@ -2,9 +2,9 @@
 
 ## Current
 
-- フェーズ: 準備フェーズ（`implementation/1_ideation/` 前のワークスペース整備）
-- 最新決定: `audit.md` は肥大化を避けるため、要点だけの圧縮ログとして運用します。
-- 次: `implementation/1_ideation/` で対象ゲームの具体情報を整理します。
+- フェーズ: 1. Ideation開始（`implementation/1_ideation/`）
+- 最新決定: 各フェーズは承認制にし、承認前は各フェーズの `plan.md` だけを更新します。
+- 次: `implementation/1_ideation/plan.md` に最初の質問・選択肢・推奨案を記録し、回答を待ちます。
 
 ## History
 
@@ -16,6 +16,8 @@
 | 2026-07-24 | 準備 | 工程ディレクトリを `1_ideation`、`2_requirements`、`3_execute`、`4_testing` に変更。 | Q: なし。A: 順番ごとに番号を振る。 | audit草案 |
 | 2026-07-24 | 準備 | `audit.md` 草案を作成し、草案C（Current + History）を採用。 | Q: なし。A: 最新状況、質問、回答を簡潔に積み重ねる。 | audit圧縮 |
 | 2026-07-24 | 準備 | `audit.md` を圧縮ログ構成へ変更。 | Q: auditが肥大化しそうなので圧縮した構成にしたい。A: Currentと1行履歴テーブルで要点だけを残す。 | ゲームアイディア整理 |
+| 2026-07-24 | 準備 | 開発環境手順を明確化。フェーズゲート、成果物一覧、executeフェーズでのプロファイル切り替えテスト方針、各フェーズの `plan.md` を追加。 | Q: executeでagentsを適用してチャットテストする方法、承認制、成果物案。A: plan.md先行・承認後成果物・プロファイル/skill切り替え案を採用。 | 1_ideationの質問整理 |
+| 2026-07-24 | 1. Ideation | ステータスを準備フェーズから1開始へ更新。 | Q: ステータスを1開始にしましょう。A: Currentと各planのStatusをフェーズ番号付きに変更。 | 1_ideationの質問整理 |
 
 ## 記録ルール
 
