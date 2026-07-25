@@ -18,19 +18,27 @@
 - Ideationフェーズでは、質問提示の前に、エージェントの現時点での感想をかなりポジティブに伝えます。他フェーズでは現実的かつ建設的なトーンで進めます。
 - ユーザーの回答は、そのフェーズの `plan.md` に短く記録します。
 - Ideationフェーズでは、承認前でも発散した議論・感想・追加質問を `implementation/1_ideation/discussion_notes.md` に記録できます。`plan.md` は人間向けサマリ、`discussion_notes.md` はアイディア出しの作業メモとして使います。
-- そのフェーズの `plan.md` と許可された作業メモ以外の成果物は、ユーザーが承認するまで作成・更新しません。
-- 承認後にだけ、そのフェーズの成果物を作成・更新します。
-- ユーザーが承認コメントを出した場合、その承認済みフェーズの成果物作成と `audit.md` 更新までは行いますが、次フェーズの作業は開始しません。作業後に「次のステージに進みますか？」「続きの実行などの指示をください」と促します。
+- 各フェーズでは、承認前でもそのフェーズの成果物を草稿として作成・更新できます。未確定事項と仮定を明示し、反復的に詳細化します。
+- 承認は成果物の作成許可ではなく、そのフェーズの草稿を次フェーズへ渡せる基準線として確定するゲートです。
+- ユーザーが承認コメントを出した場合、その承認済みフェーズの成果物確定と `audit.md` 更新までは行いますが、次フェーズの作業は開始しません。作業後に「次のステージに進みますか？」「続きの実行などの指示をください」と促します。
 - 承認が曖昧な場合は、作業を進めず、承認済みか確認します。
 
 ## フェーズごとの成果物
 
-| フェーズ | 常に更新する計画 | 承認後に作る成果物 | 目的 |
+| フェーズ | 常に更新する計画 | 草稿から作る成果物 | 目的 |
 | --- | --- | --- | --- |
 | 1. Ideation | `implementation/1_ideation/plan.md` | `idea_candidates.md`, `selected_direction.md` | 複数案を比較し、採用するゲーム方向性を1つに絞ります。 |
-| 2. Requirements/Design | `implementation/2_requirements/plan.md` | `requirements.md`, `acceptance_criteria.md`, `risk_notes.md` | 採用案を、実装可能な要件・設計・受け入れ条件・リスクに分解します。 |
+| 2. Requirements/Design | `implementation/2_requirements/plan.md` | `requirements.md`, `design.md`, `acceptance_criteria.md`, `risk_notes.md` | 採用案を、実装可能な要件・設計・受け入れ条件・リスクに分解します。 |
 | 3. Execute | `implementation/3_execute/plan.md` | `implementation_notes.md`, `agent_profile_switching.md`, `OUTPUT_AGENTS.md` 更新案 | 合意内容を最終エージェント指示へ反映し、開発環境で試せる状態にします。 |
 | 4. Testing | `implementation/4_testing/plan.md` | `test_plan.md`, `test_results.md`, `final_review.md` | 最終指示がチャット上の実作業に耐えるか検証し、昇格可否を判断します。 |
+
+### Requirements/Design開始時の進め方
+
+- フェーズ2へ進んだら、まずIdeation成果物と申し送り事項を読み直し、確定済みの方針を再質問せず整理します。
+- 次に、確定済み事項を要件へ変換し、`requirements.md`、`design.md`、`acceptance_criteria.md`、`risk_notes.md` を草稿として作成・更新します。`plan.md` には判断状況と次アクションの要約を残します。
+- Ideationからの申し送り事項は、フェーズ2で設計判断が必要な項目と、後続フェーズで実装・検証する項目に仕分けます。シナリオ単位のフォルダ構成と情報分離方式はフェーズ2で設計します。
+- 質問は、草稿を作るうえで未確定の事項、矛盾、受け入れ条件に影響する選択だけに絞ります。Ideationで回答済みの内容は、確認が必要な理由がない限り聞き直しません。
+- フェーズ2の承認前から成果物を相互参照できるファイルとして詳細化し、承認時には未決事項、要件、設計、受け入れ条件、リスクの整合を確認します。
 
 ## Executeフェーズでのチャットテスト方法
 
