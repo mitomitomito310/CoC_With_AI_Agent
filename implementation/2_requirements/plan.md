@@ -43,3 +43,4 @@
 - Phase 3 questions about exact Quick-Start scope, missing complete SAN rules, rounding, combat tie exceptions, and scenario-local mechanics are returned here as resolved source constraints, not as a phase transition.
 - Still unresolved and requiring the core rulebook before implementation: every `RUL-SCOPE-*` item, especially complete Sanity, Luck spending, chase, armor/automatic fire, full character creation/campaign economics, and other unlisted edge cases.
 - Next action remains Phase 3 execution under the existing phase state; implementation must first consume ledger IDs and must not infer unresolved rules.
+- A second page-by-page audit records all 43 pages in `source_review.md`, adds a capability-status vocabulary, provenance minimums, namespace separation, conflict handling, and an explicit source-acquisition backlog. This strengthens the approved handoff without reopening or advancing the phase.
