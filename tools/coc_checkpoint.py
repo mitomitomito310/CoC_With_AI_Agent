@@ -17,10 +17,20 @@ def commit(current:dict,pending:dict,scenario_id:str,scene_id:str)->tuple[dict,d
  if base!=actual: raise ValueError(f'stale pending version: {base} != {actual}')
  changes=pending.get('changes',[])
  if not changes: raise ValueError('empty checkpoint')
+ if len(set(pending.get('event_ids',[]))) != len(pending.get('event_ids',[])): raise ValueError('duplicate event ID')
+ if len(set(pending.get('resolution_ids',[]))) != len(pending.get('resolution_ids',[])): raise ValueError('duplicate resolution ID')
  state=json.loads(json.dumps(current))
  for c in changes:
-  keys=c['path'].strip('/').split('/'); node=state
-  for k in keys[:-1]: node=node.setdefault(k,{})
+  if c.get('visibility') not in {'public','keeper','npc'}: raise ValueError('invalid change visibility')
+  if c.get('visibility')=='npc' and not c.get('npc_id'): raise ValueError('npc visibility requires npc_id')
+  raw=c.get('path','')
+  if not raw.startswith('/') or raw=='/': raise ValueError('change path must be an absolute object path')
+  keys=raw.strip('/').split('/')
+  if any(not k or k in {'.','..'} for k in keys): raise ValueError('unsafe change path')
+  node=state
+  for k in keys[:-1]:
+   if k not in node or not isinstance(node[k],dict): raise ValueError(f'missing parent path: {c["path"]}')
+   node=node[k]
   if node.get(keys[-1]) != c.get('before'): raise ValueError(f'pre-state mismatch: {c["path"]}')
   node[keys[-1]]=c.get('after')
  state['state_version']=actual+1
