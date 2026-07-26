@@ -4,7 +4,7 @@
 
 - フェーズ: 3. Execute（進行中・未承認）
 - 固定方針: 記録駆動AI Keeper、3モード、キャラクター像と個別知識に従う自律NPC、ネタバレなしのシナリオ取込、Keeper主導の没入的なシーン遷移、原ログ不変保持を採用する。秘匿保証は通常チャットと公開ファイルまで。
-- 次: Quick-Start台帳のRUL-SCOPE未確認事項はコアルール確認まで停止し、Phase 3で解決記録schema、script/skill、OUTPUT_AGENTSへ責務を移してAC-RUL-04..13を検証する。
+- 次: `implementation_notes.md` のskill・ディレクトリ設計草稿とPhase 3の推奨仮定4項目を確認後、解決記録schema、script/skill、OUTPUT_AGENTSへ責務を移してAC-RUL-04..16を検証する。
 
 ## History
 
@@ -35,6 +35,7 @@
 | 2026-07-25 | 3. Execute | ルール調査、skill責務、実装順、完了条件をplanへ整理。公式Webは環境から接続できず、未確認の数式や例外を捏造しないゲートを設定した。 | Q: 最初の作業。A: 公式ルールを詳しく調べてskillsを整理し、同一セッションで修正。 | 4実装判断への回答待ち |
 | 2026-07-26 | 3. Execute（Phase 2資料精緻化） | `NewCoC-QS_200228.pdf`全43頁を7版Quick-Start（Chaosium 23131 ©2016、日本語版、ルールpp.7–20・シナリオpp.21–39・sheet pp.40–43）として採用し台帳化。完全SAN、Luck消費、chase等は対象外/コア確認要。フェーズ状態は変更なし。 | Q: PDF全頁確認と文書更新。A: 版・範囲・式・分岐・例外・頁を相互追跡化。 | Phase 3でschema→script/skill→OUTPUT_AGENTSへ移しAC-RUL-04..13を検証 |
 | 2026-07-26 | 3. Execute（Phase 2資料再監査） | PDF 43頁のページ別証跡、source capability、resolution provenance、authority namespace、conflict stop、追加取得backlogを追補。Quick-Startを完全版と誤認しない境界を強化し、フェーズ状態は変更なし。 | Q: 全43頁を詳細再確認し資料強化。A: `source_review.md`とFR/Risk/ACへ追跡可能に反映。 | Phase 3でAC-RUL-14..16を含め実装・検証 |
+| 2026-07-26 | 3. Execute | 7つの責務別skill、共有rules/schema/tools、隔離scenario workspace、activation境界を設計草稿化。未回答4項目は推奨案の作業仮定でありPhase 3は未承認のまま。 | Q: 必要skillsとディレクトリ構成を設計。A: `implementation_notes.md`へ反映。 | 草稿と1A/2A/3A/4Aの確認後に実装 |
 
 ## 記録ルール
 

@@ -5,10 +5,10 @@
 - Phase: 3. Execute
 - Status: In progress
 - Approval: Not approved
-- Current question: ルール参照の運用、skill分割、ダイス処理、初回fixtureを確定する
+- Current question: 草稿化したskill・ディレクトリ設計を前提に、ルール参照の運用、skill分割、ダイス処理、初回fixtureを確定する
 - Recommended option: 1A / 2A / 3A / 4A
 - User answer: Phase 2の回答を反映し、クトゥルフ神話TRPGのルールと進行を公式Web情報から詳しく調査したうえで、必要なskillsを整理して実装計画を作る。作業は細切れのtask-stubにせず、このセッション内で資料へ反映する
-- Next action: 下記4問の回答を受け、公式参照元を利用できる環境で調査台帳を確定してから、雛形、validator、補助script/skill、`OUTPUT_AGENTS.md`を小さく実装する
+- Next action: `implementation_notes.md` の設計草稿をレビューし、下記4問の回答を受けてから、schema、fixture、validator、補助script/skill、`OUTPUT_AGENTS.md`を小さく実装する
 
 ## Phase 2 Handoff
 
@@ -106,7 +106,7 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 
 ## Deliverables
 
-- `implementation_notes.md`: 実装順、schema、作成物、公式参照台帳、暫定裁定、Deferred scope。
+- `implementation_notes.md`: skill境界とディレクトリ構成を草稿化済み。今後、実装順、schema、作成物、公式参照台帳、暫定裁定、Deferred scopeを実績に合わせて更新する。
 - `agent_profile_switching.md`: 安全な切替、復元、利用中プロファイル/skillの監査手順。
 - `OUTPUT_AGENTS.md`: skillなしでも保持すべきゲーム固有のKeeper運営規則。
 - シナリオ雛形と短編fixture。
@@ -153,6 +153,7 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 | 2026-07-25 | Phase 3で最初に行うこと | 直接実装 / ルール調査後にskill整理 | ルール調査後にskill整理 | 公式Webを詳細に調べて必要skillsを整理し、実装計画を作る | 調査方針、責務表、skill候補、実装順をplanへ作成 |
 | 2026-07-25 | 作業のまとめ方 | task-stubへ分割 / このセッションで資料へ反映 | このセッションで資料へ反映 | タスクは分けずにこのセッション内で修正 | Phase 2回答反映とPhase 3計画作成を一括実施 |
 | 2026-07-25 | 公式Web調査の接続結果 | 調査完了 / 未完 | 未完なら明示して根拠を捏造しない | 検索APIはHTTP 401、Chaosium/KADOKAWAへの直接接続はHTTP 403 | 公式確認済みとはせず、再調査を最初の実装ゲートに設定 |
+| 2026-07-26 | 必要skillsとディレクトリ構成 | 単一skill / 責務分割 / 判定別の細分化 | 責務分割 | 設計を依頼。未回答4項目は推奨案を作業仮定にする | 7つのMVP/domain skill、共有rules/schema/tools、隔離scenario workspaceを`implementation_notes.md`へ草稿化 |
 
 ## Rule-ledger responsibility transfer (2026-07-26)
 
