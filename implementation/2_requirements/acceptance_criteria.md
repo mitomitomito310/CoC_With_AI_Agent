@@ -9,7 +9,7 @@
 
 - **AC-SCN-01 (FR-SCN-01..04):** テキスト/Markdownの短編fixtureを配置すると、原本を変更せず、開始前検証が対象版、参照元、開始地点、人物、秘匿区分、不足事項を報告する。
 - **AC-SCN-02 (FR-SCN-05, QR-03, QR-09):** 結末、黒幕、未発見手掛かり、NPC秘密を含むfixtureを取り込んでも、開始前チャット、公開ファイル、公開通知へ内容または推測可能な言い換えが出ない。
-- **AC-RUL-01 (FR-RUL-01):** 新規ユーザー探索者をフル手順で作成でき、途中の選択、計算結果、最終sheetを再確認できる。
+- **AC-RUL-01 (FR-RUL-01):** Quick-Startだけを参照元にした場合、新規ユーザー探索者を同書の簡易手順で作成でき、途中の選択、計算結果、最終sheetを再確認できる一方、「フル手順」と表示しない。フル手順プロファイルは権限ある完全版参照元が未登録なら開始を拒否する。
 - **AC-RUL-02 (FR-RUL-02..03):** 判定ログから技能・能力、難易度、修正、ダイス、結果、根拠または暫定裁定を追跡できる。
 - **AC-RUL-03 (FR-RUL-04):** 補助skill/scriptを無効にしたレビューでも、Keeperの必須運営規則を`OUTPUT_AGENTS.md`だけから特定できる。
 
@@ -57,3 +57,6 @@ All fixtures must persist a resolution record shaped by `design.md`, including t
 | **AC-RUL-11** (FR-RUL-07; RUL-SAN-01..02; p.16) | SAN 60 with loss `0/1D6`: rolls 60 and 61; failed roll loses 5, then INT 70 rolls 70 and 71 in separate cases | 60 takes 0; 61 rolls 1D6. Loss 5 triggers INT: 70 starts temporary insanity 1D10 hours; 71 does not. Loss/state order is logged. |
 | **AC-RUL-12** (FR-RUL-07; RUL-INS-01..02, RUL-SCOPE-01; pp.16–17) | Temporary insanity with selected bout, phobia, Reality Check success/failure | Bout lasts 1D10 rounds; applicable phobia/mania gives one penalty die to all actions; successful check pierces delusion. Failed check is flagged for sourced Keeper handling rather than invented complete-SAN effects. |
 | **AC-RUL-13** (FR-RUL-08; RUL-SCN-01..03; pp.21–43) | Import the included scenario index and blank sheets | Scenario mechanics remain `scenario_id` scoped/spoiler-protected; sheet fields do not create rules absent from pp.7–20. |
+| **AC-RUL-14** (FR-RUL-09..10) | Request full creation while only the Quick-Start profile is registered; separately resolve a Quick-Start Hard roll | Full creation is classified `core_rule_check_required` and does not begin. The valid roll stores profile, ledger/page, pre-state, raw candidates, thresholds/modifiers, branch, and state delta sufficiently to replay it. |
+| **AC-RUL-15** (FR-RUL-11; RUL-SCN-01..03) | Import one sheet label, one worked example, one scenario-local check, and one handout | None enters the universal-rule namespace. The local check requires `scenario_id` and page; the handout is immutable and has an unreleased/released state separate from its source. |
+| **AC-RUL-16** (FR-RUL-12) | Present conflicting generic/profile and scenario-local instructions, then attempt an irreversible state change | Conflict is recorded; scenario instruction is eligible only in its own scenario. If authority remains ambiguous, no state delta is applied until a source or explicit reversible Keeper ruling resolves it. |

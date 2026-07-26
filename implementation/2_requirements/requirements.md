@@ -35,7 +35,7 @@
 
 ### Character creation and rules
 
-- **FR-RUL-01:** ユーザー探索者は対象版のフル手順で作成し、質問分割、候補提示、自動計算で操作を支援する。
+- **FR-RUL-01:** 最終目標ではユーザー探索者を対象版のフル手順で作成し、質問分割、候補提示、自動計算で操作を支援する。ただし利用可能な参照元がQuick-Startのみの間は簡易作成プロファイルに限定し、フル手順対応を表示・推測しない。
 - **FR-RUL-02:** ダイス結果、適用した技能・能力、難易度、ボーナス/ペナルティ、結果区分、参照根拠を追跡できる。
 - **FR-RUL-03:** ルール参照元で確認できた裁定とKeeperの暫定裁定を区別する。根拠不足が不可逆な結果へ影響するときは確定前に確認する。
 - **FR-RUL-04:** skills/scriptsは計算と手順案内を補助するが、恒久的な運営規則は`OUTPUT_AGENTS.md`に再現可能でなければならない。
@@ -103,3 +103,7 @@ The detailed source of truth is [`rule_ledger.md`](rule_ledger.md). This addendu
 - **FR-RUL-06 (RUL-INJ-01, RUL-HEAL-01..02):** Apply HP floor, major-wound threshold, immediate-death strict comparison, consciousness/dying branches, stabilization, and natural/First Aid/Medicine healing in the recorded order.
 - **FR-RUL-07 (RUL-SAN-01..03, RUL-INS-01..02):** Apply SAN success/failure loss, single-roll 5+ loss INT branch, temporary-insanity duration/bout/state changes, Reality Check, and only the recovery rules explicitly present. Flag the complete SAN system as requiring core rules.
 - **FR-RUL-08 (RUL-KPR-01..02, RUL-SCN-01..03):** Separate universal Quick-Start procedures from Keeper discretion and `scenario_id`-scoped mechanics; never expose or promote pp.21–39 spoiler data as a generic rule.
+- **FR-RUL-09 (source capability gate):** Declare the requested rules profile and available source set before play. Classify each requested mechanic as `verified`, `scenario_local`, `core_rule_check_required`, `keeper_ruling_required`, or `unsupported`; do not label the Quick-Start creation path as full current-edition creation.
+- **FR-RUL-10 (provenance record):** A mechanical result retains profile, ledger/page references, scenario scope where applicable, declared goal, pre-state, roll candidates/selection, thresholds/modifiers, selected branch, state delta, and unresolved-source flag. The public rendering may redact spoiler-bearing provenance but must retain it in Keeper-only state.
+- **FR-RUL-11 (authority namespaces):** Universal rules, examples, character-sheet labels, and scenario-local mechanics/assets use separate namespaces. Import never promotes an example, sheet field, scenario statistic, local difficulty, hazard, reward, or handout into a universal rule.
+- **FR-RUL-12 (conflict stop):** Conflicting or ambiguous authorities are recorded rather than silently merged. A scenario instruction may override a generic assumption only within its scenario; unresolved authority blocks irreversible effects and requests a source or explicit reversible Keeper ruling.

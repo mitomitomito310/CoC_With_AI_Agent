@@ -119,9 +119,12 @@ The rule ledger IDs are defined in [`rule_ledger.md`](rule_ledger.md). A resolut
 ```yaml
 resolution:
   id: roll-0001
+  rules_profile: coc7e_quick_start_2016_ja
+  capability_status: verified # verified | scenario_local | core_rule_check_required | keeper_ruling_required | unsupported
   scenario_id: null              # required for RUL-SCN-* mechanics
   actor_id: investigator-01
   intent: "observable goal agreed with Keeper"
+  pre_state_refs: [character-state-v3]
   check:
     kind: skill                   # skill | characteristic | luck | sanity | combat
     name: Spot Hidden
@@ -160,6 +163,7 @@ resolution:
     pages: [14, 15]
     core_rule_check_required: false
     keeper_ruling: null
+  authority_conflict: null        # conflicting profiles/pages and resolution, if any
 ```
 
 Processing order is fixed:
@@ -173,3 +177,7 @@ Processing order is fixed:
 7. **Derive effect:** calculate combat damage, injury, healing, or SAN branches in domain order without mutating state yet (RUL-DMG-*, RUL-INJ-*, RUL-HEAL-*, RUL-SAN-*).
 8. **Apply atomically:** append the resolution, then apply referenced state deltas once. Mark `applied`; never apply an unreferenced narrative result.
 9. **Cite/stop:** attach ledger IDs and PDF pages. If a required branch is absent, set `core_rule_check_required: true` and stop before irreversible application (RUL-SCOPE-*; FR-RUL-03).
+
+Before step 1, the session registers a source manifest and rules profile. Only `verified` or correctly scoped `scenario_local` capabilities enter the normal pipeline. `core_rule_check_required` and `unsupported` stop; `keeper_ruling_required` may proceed only as an explicit, local, reversible ruling. Universal ledger rules, worked examples, sheet fields/base values, scenario mechanics, and handout assets occupy different authority namespaces. A conflict is retained in `authority_conflict` and blocks irreversible state deltas until resolved.
+
+The complete page-by-page source classification and acquisition backlog are maintained in [`source_review.md`](source_review.md); the design consumes that classification rather than parsing all PDF content into a universal rule store.

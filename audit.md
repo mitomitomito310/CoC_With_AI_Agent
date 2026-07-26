@@ -34,6 +34,7 @@
 | 2026-07-25 | 2. Requirements/Design | 残る判断を反映してPhase 2を確定。結末を知らないユーザーへ取込結果を漏らさず、秘匿は論理分離、シーンはKeeperが自動確定、原ログは不変保持とした。 | Q: 取込、秘匿、シーン、長編ログ。A: ネタバレ禁止、2A、Keeper主導で明示中止まで継続、4A。 | Phase 3計画作成 |
 | 2026-07-25 | 3. Execute | ルール調査、skill責務、実装順、完了条件をplanへ整理。公式Webは環境から接続できず、未確認の数式や例外を捏造しないゲートを設定した。 | Q: 最初の作業。A: 公式ルールを詳しく調べてskillsを整理し、同一セッションで修正。 | 4実装判断への回答待ち |
 | 2026-07-26 | 3. Execute（Phase 2資料精緻化） | `NewCoC-QS_200228.pdf`全43頁を7版Quick-Start（Chaosium 23131 ©2016、日本語版、ルールpp.7–20・シナリオpp.21–39・sheet pp.40–43）として採用し台帳化。完全SAN、Luck消費、chase等は対象外/コア確認要。フェーズ状態は変更なし。 | Q: PDF全頁確認と文書更新。A: 版・範囲・式・分岐・例外・頁を相互追跡化。 | Phase 3でschema→script/skill→OUTPUT_AGENTSへ移しAC-RUL-04..13を検証 |
+| 2026-07-26 | 3. Execute（Phase 2資料再監査） | PDF 43頁のページ別証跡、source capability、resolution provenance、authority namespace、conflict stop、追加取得backlogを追補。Quick-Startを完全版と誤認しない境界を強化し、フェーズ状態は変更なし。 | Q: 全43頁を詳細再確認し資料強化。A: `source_review.md`とFR/Risk/ACへ追跡可能に反映。 | Phase 3でAC-RUL-14..16を含め実装・検証 |
 
 ## 記録ルール
 
