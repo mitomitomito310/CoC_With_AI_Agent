@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"handout.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["handout_id","source_path","sha256","release_state","released_path"],
+  "properties":{
+    "handout_id":{"type":"string","minLength":1},
+    "source_path":{"type":"string","pattern":"^source/handouts/"},
+    "sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "release_state":{"enum":["unreleased","released"]},
+    "released_path":{"type":["string","null"]}
+  }
+}

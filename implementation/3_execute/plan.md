@@ -8,7 +8,7 @@
 - Current question: なし
 - Recommended option: 1A / 2A / 3A / 4A
 - User answer: `1A、2A（責務に合わせて最適に細分化）、3A、4A`。公式公開資料を優先して不足箇所だけ所持ルールブックの参照情報で補い、責務別skill、記録可能なscriptと物理ダイス入力、自作の極小fixtureを採用する
-- Next action: 初回実装を拡張し、未実装のSAN/戦闘branch、scenario import、resume投影、AC-RUL-06/08/10..16のfixtureを追加して全受け入れ条件を検証する
+- Next action: 実装済みのSAN/戦闘/回復/import/resume/authority gateと29 testを成果物レビューし、ゲームプロファイルで小規模チャット試験を行った後、Execute承認を確認する
 
 ## Phase 2 Handoff
 
@@ -114,11 +114,11 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 
 ## Phase Exit Checklist
 
-- [ ] 公式参照台帳でMVP対象ルールの版、根拠、確定状態を追跡できる
+- [x] 公式参照台帳でMVP対象ルールの版、根拠、確定状態を追跡できる
 - [x] 原本を変更せず、ユーザーへネタバレせずにscenario workspaceを準備できる
-- [ ] 探索者作成とMVP対象判定を根拠ログ付きで処理できる
-- [ ] NPC別知識、公開情報、Keeper情報を混ぜずに進行できる
-- [ ] Keeper主導のscene checkpointと明示中止からの再開ができる
+- [x] 探索者作成とMVP対象判定を根拠ログ付きで処理できる
+- [x] NPC別知識、公開情報、Keeper情報を混ぜずに進行できる
+- [x] Keeper主導のscene checkpointと明示中止からの再開ができる
 - [x] 原ログ、checkpoint/current、派生要約の優先順位を検証できる
 - [x] 恒久ルールが`OUTPUT_AGENTS.md`だけから特定できる
 - [x] 開発用プロファイルへ安全に戻せる

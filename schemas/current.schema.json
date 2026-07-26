@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"current.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["scenario_id","state_version","last_checkpoint_id","public","keeper","npcs"],
+  "properties":{
+    "scenario_id":{"type":"string"},
+    "state_version":{"type":"integer","minimum":0},
+    "last_checkpoint_id":{"type":["string","null"]},
+    "public":{"type":"object"},
+    "keeper":{"type":"object"},
+    "npcs":{"type":"object","additionalProperties":{"type":"object"}}
+  }
+}

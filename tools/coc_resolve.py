@@ -20,15 +20,48 @@ def success_level(roll:int,skill:int)->str:
  return 'failure'
 def resolves(level:str,difficulty:str)->bool:
  order={'failure':0,'regular':1,'hard':2,'extreme':3}; return order[level]>=order[difficulty]
-def resolution(*,skill:int,difficulty:str,ones:int,tens:list[int],modifier:int=0,source='physical',goal='',scenario_id=None)->dict:
+def resolution(*,skill:int,difficulty:str,ones:int,tens:list[int],modifier:int=0,source='physical',goal='',scenario_id=None,
+               pre_state_refs:list[str]|None=None,state_deltas:list[dict]|None=None)->dict:
  dice=select(ones,tens,modifier); level=success_level(dice['selected'],skill); ok=resolves(level,difficulty)
- return {'resolution_id':'res-'+uuid.uuid4().hex[:12],'profile':'coc7e_quick_start_2016_ja','scenario_id':scenario_id,'capability_status':'verified','ledger_ids':['RUL-RES-02'] + (['RUL-MOD-01'] if modifier else []),'source_pages':[14,15] if modifier else [14],'goal':goal,'pre_state_refs':[],'roll':{'source':source,'ones':ones,'tens_candidates':tens,'selected':dice['selected']},'thresholds':thresholds(skill),'selected_branch':f'{level}_{"success" if ok else "failure"}','state_deltas':[],'unresolved_source':None,'applied':False,'created_at':datetime.now(timezone.utc).isoformat().replace('+00:00','Z')}
+ return {'resolution_id':'res-'+uuid.uuid4().hex[:12],'profile':'coc7e_quick_start_2016_ja','scenario_id':scenario_id,'capability_status':'verified','ledger_ids':['RUL-RES-02'] + (['RUL-MOD-01'] if modifier else []),'source_pages':[14,15] if modifier else [14],'goal':goal,'pre_state_refs':pre_state_refs or [],'roll':{'source':source,'ones':ones,'tens_candidates':tens,'candidates':dice['candidates'],'selected':dice['selected'],'modifier':modifier},'thresholds':thresholds(skill),'selected_branch':f'{level}_{"success" if ok else "failure"}','state_deltas':state_deltas or [],'unresolved_source':None,'applied':False,'created_at':datetime.now(timezone.utc).isoformat().replace('+00:00','Z')}
 def opposed(a:dict,b:dict)->str:
  rank={'failure':0,'regular':1,'hard':2,'extreme':3}
  if rank[a['level']] != rank[b['level']]: return 'a' if rank[a['level']]>rank[b['level']] else 'b'
  if a['skill'] != b['skill']: return 'a' if a['skill']>b['skill'] else 'b'
  if a['roll'] != b['roll']: return 'a' if a['roll']<b['roll'] else 'b'
  return 'tie'
+
+def push_eligibility(*, combat:bool, method_changed:bool, consequence_recorded:bool,
+                     attempts:int=0, keeper_approved:bool=False)->dict:
+ """Return the auditable Quick-Start push gate without making a Keeper decision."""
+ reasons=[]
+ if combat: reasons.append('combat_roll_cannot_be_pushed')
+ if attempts: reasons.append('push_already_used')
+ if not method_changed: reasons.append('method_not_materially_changed')
+ if not consequence_recorded: reasons.append('escalated_consequence_not_recorded')
+ if not keeper_approved: reasons.append('keeper_approval_required')
+ return {
+  'eligible':not reasons,
+  'reasons':reasons,
+  'ledger_ids':['RUL-PSH-01','RUL-PSH-02'],
+  'source_pages':[14,16],
+ }
+
+def authority_gate(*, generic_profile:str, scenario_id:str|None=None,
+                   scenario_profile:str|None=None, conflict_resolved:bool=False,
+                   reversible_ruling:bool=False)->dict:
+ """Stop irreversible effects when profile and scenario authority conflict."""
+ conflict=bool(scenario_profile and scenario_profile != generic_profile)
+ permitted=not conflict or conflict_resolved or reversible_ruling
+ return {
+  'authority': 'scenario_local' if scenario_profile and scenario_id else 'generic',
+  'scenario_id':scenario_id,
+  'conflict':conflict,
+  'irreversible_change_permitted':permitted and not reversible_ruling,
+  'reversible_ruling_permitted':permitted,
+  'status':'resolved' if conflict_resolved else 'reversible_ruling' if reversible_ruling else 'blocked' if conflict else 'clear',
+  'ledger_ids':['RUL-SCN-01','RUL-SCN-02','RUL-SCN-03'] if scenario_profile else ['RUL-RES-02'],
+ }
 def damage(current:int,maximum:int,amount:int,already_major=False)->dict:
  if min(current,maximum,amount)<0: raise ValueError('HP values cannot be negative')
  hp=max(0,current-amount); major=amount>=math.ceil(maximum/2); immediate=amount>maximum

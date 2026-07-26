@@ -199,3 +199,13 @@ Create the seven confirmed skill folders only when their workflow is implemented
 - Initialized and implemented the seven confirmed skill folders with `SKILL.md` and `agents/openai.yaml`.
 - Replaced the placeholder `OUTPUT_AGENTS.md` with the candidate game profile and added isolated profile-switching/restore instructions.
 - Skill Creator's `quick_validate.py` is currently blocked because the environment lacks PyYAML. Initialization succeeded; a dependency-free structural check is used until that environment limitation is removed.
+
+## Full Execute Expansion (2026-07-26)
+
+- Implemented deterministic push eligibility and authority-conflict gates. Combat pushes, repeat pushes, unchanged methods, missing consequences, and unresolved irreversible source conflicts now stop with machine-readable reasons.
+- Implemented Quick-Start combat initiative, readied-firearm order, dodge/fight-back tie dispatch, outnumbering/maneuver and firearm modifiers, First Aid, Medicine, and natural major-wound healing branches.
+- Implemented SAN loss selection, the single-loss 5+ INT branch, temporary-insanity duration, bout/phobia/mania modifiers, and the Reality Check failure source gate without inventing complete-rule effects.
+- Implemented Quick-Start investigator allocation, derived values, damage bonus/build scope, and replayable skill improvement calculations with ledger/page provenance.
+- Added a non-overwriting Markdown/text scenario importer that preserves source bytes and checksum, creates separate Keeper/public/session namespaces, and keeps handout source separate from release state. It deliberately does not promote sheet labels, examples, or scenario prose into universal rules.
+- Hardened checkpoint changes with path, visibility, NPC identity, duplicate-reference, stale-version, and before-value gates. Added separate public, Keeper, and per-NPC resume projections generated only from committed current state.
+- Added schemas for current state, scenario-local rules, and handouts, plus acceptance/integration/unit coverage for AC-RUL-06, AC-RUL-08, AC-RUL-10..16 and AC-STA-03. The suite now contains 29 passing tests.

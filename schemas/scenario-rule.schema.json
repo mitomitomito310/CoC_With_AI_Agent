@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"scenario-rule.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["rule_id","scenario_id","source_path","source_page","instruction","visibility"],
+  "properties":{
+    "rule_id":{"type":"string","pattern":"^SCN-[A-Z0-9_-]+$"},
+    "scenario_id":{"type":"string","minLength":3},
+    "source_path":{"type":"string","pattern":"^source/"},
+    "source_page":{"type":"integer","minimum":1},
+    "instruction":{"type":"string","minLength":1},
+    "visibility":{"const":"keeper"}
+  }
+}
