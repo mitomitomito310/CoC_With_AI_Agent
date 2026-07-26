@@ -40,3 +40,20 @@
 - 初回対象外は実装漏れではなくDeferred scopeとして明記されている。
 - `risk_notes.md`のCritical/Highリスクに予防策と検証先がある。
 - Execute担当がゲーム方針を新たに決めず、テンプレートと指示候補の実装へ着手できる。
+
+## Verified Rule Fixtures (Quick-Start PDF)
+
+All fixtures must persist a resolution record shaped by `design.md`, including the cited ledger IDs/pages.
+
+| AC / links | Fixture | Expected |
+| --- | --- | --- |
+| **AC-RUL-04** (FR-RUL-02; RUL-RES-02; p.14) | Skill 60, rolls 60 / 30 / 12 at Regular / Hard / Extreme difficulty | Each equals its threshold and succeeds at the named difficulty; 31 fails Hard and 13 fails Extreme. |
+| **AC-RUL-05** (FR-RUL-02; RUL-MOD-01; pp.14–15) | Ones 4, tens 20 and 40 | One bonus selects 24; one penalty selects 44. A bonus plus penalty cancels and consumes only the ordinary tens result. Raw dice and selection remain logged. |
+| **AC-RUL-06** (FR-RUL-03; RUL-PSH-01..02; pp.14,16) | Failed STR door attempt followed by a materially changed leverage method; failed firearm attack offered the same option | Keeper may permit exactly one door reroll after recording the escalated consequence. Firearm/combat push is rejected. An unchanged “try again” is not automatically eligible and records Keeper decision. |
+| **AC-RUL-07** (FR-RUL-02; RUL-OPP-01; p.14) | A: Hard with skill 50; B: Regular with 80. Then both Hard with skills 50/80. Then equal skills and D100 42/37 | A wins first by level; B wins second by higher skill; lower 37 wins final tie-break. |
+| **AC-RUL-08** (FR-RUL-05; RUL-CMB-01..05; pp.16–19) | DEX 70/50/45; melee attack Hard vs dodge Hard and fight-back Hard; second melee attacker; readied firearm at DEX50 | Order 70, then readied firearm at effective 100 as applicable, then remaining DEX. Dodge wins equal level; attacker wins equal fight-back; later melee attacker gains one bonus die; no combat roll exposes push. |
+| **AC-RUL-09** (FR-RUL-05..06; RUL-DMG-02, RUL-INJ-01; p.19) | max HP 12/current 12: single damage 6; separate case damage 13; major-wounded character reaches 0; non-major-wounded character reaches 0 | Damage 6 causes major wound (`>= half`) and CON check; 13 causes immediate death (`> max`); major+0 enters dying CON sequence; non-major+0 is unconscious, not dying. HP never negative. |
+| **AC-RUL-10** (FR-RUL-06; RUL-HEAL-01..02; pp.11,19) | Major wound with weekly Regular/Extreme CON; First Aid within one hour; Medicine same day and after the injury day | Restore 1D3/2D3 respectively and remove major wound only by stated conditions. First Aid restores 1; Medicine restores 1D3, takes >=1 hour/tools, and after the day requires Hard. Dying case stabilizes with First Aid before Medicine. |
+| **AC-RUL-11** (FR-RUL-07; RUL-SAN-01..02; p.16) | SAN 60 with loss `0/1D6`: rolls 60 and 61; failed roll loses 5, then INT 70 rolls 70 and 71 in separate cases | 60 takes 0; 61 rolls 1D6. Loss 5 triggers INT: 70 starts temporary insanity 1D10 hours; 71 does not. Loss/state order is logged. |
+| **AC-RUL-12** (FR-RUL-07; RUL-INS-01..02, RUL-SCOPE-01; pp.16–17) | Temporary insanity with selected bout, phobia, Reality Check success/failure | Bout lasts 1D10 rounds; applicable phobia/mania gives one penalty die to all actions; successful check pierces delusion. Failed check is flagged for sourced Keeper handling rather than invented complete-SAN effects. |
+| **AC-RUL-13** (FR-RUL-08; RUL-SCN-01..03; pp.21–43) | Import the included scenario index and blank sheets | Scenario mechanics remain `scenario_id` scoped/spoiler-protected; sheet fields do not create rules absent from pp.7–20. |

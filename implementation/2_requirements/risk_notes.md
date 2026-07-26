@@ -24,3 +24,14 @@
 ## Residual Design Decisions
 
 なし。実装中に新たな不足が判明した場合は、Phase 2の`plan.md`へ判断事項として戻す。
+
+## Verified-rule risk addendum (2026-07-26)
+
+| ID | Risk | Severity | Early signal | Mitigation | Verification / owner |
+| --- | --- | --- | --- | --- | --- |
+| R-15 | 7th-edition Quick-Start, another edition, English terminology, and Japanese core rules are mixed | High | Formula has no ledger ID/page or contradicts `rule_ledger.md` | Pin source/edition per resolution; implement only ledger-confirmed scope | AC-RUL-04..13 / FR-RUL-02..08 |
+| R-16 | Quick-Start omissions are silently filled from memory | Critical | Luck spending, full insanity, chase, armor, or unlisted creation procedure appears without source | Use `RUL-SCOPE-*` and `core_rule_check_required`; stop irreversible effects | AC-RUL-06, AC-RUL-12 |
+| R-17 | Half/fifth or HP boundary rounding/comparison is wrong | High | Rounded rather than floored threshold; `>` and `>=` conflated | Central deterministic floor helper; retain full and thresholds; boundary fixtures | AC-RUL-04, AC-RUL-09 |
+| R-18 | Generic opposed tie logic is incorrectly used for dodge/fight-back or special damage | High | Equal dodge lets attack hit; fight-back wins tie; all Extremes use one formula | Dispatch to explicit ledger rule before generic comparison/damage | AC-RUL-07..09 |
+| R-19 | Scenario-local exception becomes a universal rule or leaks spoilers | Critical | pp.21–39 condition lacks `scenario_id` or appears publicly | Store scenario mechanics separately with page/scope; spoiler scan outputs | AC-RUL-13 / FR-RUL-08 |
+| R-20 | Ledger reproduces excessive copyrighted prose, tables, handouts, or scenario text | High | Long passages/table rows copied rather than procedural summaries | Retain formulas/branches/IDs/page pointers only; review diffs against source | Documentation review / Execute |

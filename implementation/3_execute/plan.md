@@ -153,3 +153,16 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 | 2026-07-25 | Phase 3で最初に行うこと | 直接実装 / ルール調査後にskill整理 | ルール調査後にskill整理 | 公式Webを詳細に調べて必要skillsを整理し、実装計画を作る | 調査方針、責務表、skill候補、実装順をplanへ作成 |
 | 2026-07-25 | 作業のまとめ方 | task-stubへ分割 / このセッションで資料へ反映 | このセッションで資料へ反映 | タスクは分けずにこのセッション内で修正 | Phase 2回答反映とPhase 3計画作成を一括実施 |
 | 2026-07-25 | 公式Web調査の接続結果 | 調査完了 / 未完 | 未完なら明示して根拠を捏造しない | 検索APIはHTTP 401、Chaosium/KADOKAWAへの直接接続はHTTP 403 | 公式確認済みとはせず、再調査を最初の実装ゲートに設定 |
+
+## Rule-ledger responsibility transfer (2026-07-26)
+
+| Destination | Responsibility transferred from `rule_ledger.md` | Must not own |
+| --- | --- | --- |
+| Character-creation skill | Guided sequence and source prompts for RUL-CHR/DRV/SKL; surface outside-scope flags | Hidden arithmetic variants or core-only creation rules |
+| Core-resolution skill | Frame intent/difficulty, push dialogue, opposed context, cite ledger pages | Random generation, mutable state, or inferred missing rules |
+| Combat/Sanity skills | Orchestrate only confirmed RUL-CMB/DMG/INJ/HEAL/SAN/INS branches and stop on scope flags | Full combat/SAN system not in the PDF |
+| Deterministic scripts | Floor thresholds/derived values, D100 candidates, bonus/penalty choice, comparisons, damage/state deltas; emit raw audit data | Keeper discretion or prose consequence invention |
+| Scenario data | RUL-SCN page-scoped local rules, spoiler-bearing indexes and fixture inputs | Universal rule definitions or public output |
+| `OUTPUT_AGENTS.md` | Source hierarchy, no-inference stop rule, Keeper discretion boundary, combat push prohibition, citation/state-application order | Copied rulebook prose/tables or script implementation detail |
+
+Phase 3 must implement the `design.md` resolution record first, validate AC-RUL-04..13, and map every encoded branch to FR-RUL + ledger ID + PDF page + risk ID. `RUL-SCOPE-*` remains a hard stop until a core-rule source is supplied; this refinement does not change either phase's approval status.

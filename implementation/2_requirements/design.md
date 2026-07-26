@@ -111,3 +111,65 @@ YAMLは機械的な検証・更新が必要な状態、Markdownは人間が読�
 - 開発用`AGENTS.md`とゲーム用`OUTPUT_AGENTS.md`を切り替える手順。
 - Keeper参照境界、NPC pipeline、3モード、scene transactionを記載した`OUTPUT_AGENTS.md`更新案。
 - 短編サンプルまたはfixtureと、正常系・漏洩系・再開系の試験入力。
+
+## Rule Resolution Record and Processing Pipeline
+
+The rule ledger IDs are defined in [`rule_ledger.md`](rule_ledger.md). A resolution is append-only; later state changes reference it rather than rewriting it.
+
+```yaml
+resolution:
+  id: roll-0001
+  scenario_id: null              # required for RUL-SCN-* mechanics
+  actor_id: investigator-01
+  intent: "observable goal agreed with Keeper"
+  check:
+    kind: skill                   # skill | characteristic | luck | sanity | combat
+    name: Spot Hidden
+    full_value: 55
+    difficulty: hard
+    thresholds: {regular: 55, hard: 27, extreme: 11}
+  modifiers:
+    bonus: 1
+    penalty: 1
+    net: 0
+    reason: ["source facts"]
+  dice:
+    source: script               # script | user_supplied
+    ones: 4
+    tens: [20]
+    candidates: [24]
+    selected: 24
+    selection: only
+  outcome:
+    success_level: hard          # failure | regular | hard | extreme
+    meets_difficulty: true
+    opposed: null                # participant results, values, tie-break when used
+  push:
+    eligible: true
+    requested: false
+    changed_approach: null
+    failure_consequence: null
+    reroll_resolution_id: null
+  application:
+    rule_effects: []
+    state_delta_ids: []
+    applied: false
+  references:
+    ledger_ids: [RUL-RES-02, RUL-MOD-01]
+    source: NewCoC-QS_200228.pdf
+    pages: [14, 15]
+    core_rule_check_required: false
+    keeper_ruling: null
+```
+
+Processing order is fixed:
+
+1. **Frame:** classify intent, agree goal, decide whether uncertainty warrants a roll, and select skill/characteristic and `scenario_id` (RUL-RES-01, RUL-KPR-01).
+2. **Build thresholds:** floor half/fifth, select required difficulty, and preserve the full value used (RUL-CHR-02, RUL-RES-02).
+3. **Normalize modifiers:** cancel bonus/penalty pairs; retain every reason and candidate-tens die (RUL-MOD-01).
+4. **Roll/select:** record source and raw components; create D100 candidates including the `00/0 = 100` rule; choose lowest/highest as required (RUL-RES-03, RUL-MOD-01).
+5. **Classify:** determine success level, then whether it meets difficulty. For opposed/melee, compare both records using the applicable tie rule before any effect (RUL-OPP-01, RUL-CMB-02).
+6. **Offer push only after failure:** exclude combat, require a changed approach and Keeper approval, and record the escalated failure consequence before the reroll (RUL-PSH-01..02).
+7. **Derive effect:** calculate combat damage, injury, healing, or SAN branches in domain order without mutating state yet (RUL-DMG-*, RUL-INJ-*, RUL-HEAL-*, RUL-SAN-*).
+8. **Apply atomically:** append the resolution, then apply referenced state deltas once. Mark `applied`; never apply an unreferenced narrative result.
+9. **Cite/stop:** attach ledger IDs and PDF pages. If a required branch is absent, set `core_rule_check_required: true` and stop before irreversible application (RUL-SCOPE-*; FR-RUL-03).
