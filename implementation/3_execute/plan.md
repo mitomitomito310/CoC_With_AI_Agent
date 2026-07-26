@@ -8,7 +8,7 @@
 - Current question: ルール参照の運用、skill分割、ダイス処理、初回fixtureを確定する
 - Recommended option: 1A / 2A / 3A / 4A
 - User answer: Phase 2の回答を反映し、クトゥルフ神話TRPGのルールと進行を公式Web情報から詳しく調査したうえで、必要なskillsを整理して実装計画を作る。作業は細切れのtask-stubにせず、このセッション内で資料へ反映する
-- Next action: 下記4問の回答を受け、公式参照元を利用できる環境で調査台帳を確定してから、雛形、validator、補助script/skill、`OUTPUT_AGENTS.md`を小さく実装する
+- Next action: Phase 2の`rule_ledger.md`を入力契約としてschema/fixtureを実装する。Quick-Start対象外はコアルール確認まで停止し、下記4問の回答なしに運用選択を確定しない
 
 ## Phase 2 Handoff
 
@@ -37,7 +37,7 @@
 | 3 | Chaosium Call of Cthulhu Starter Set official page | 初心者向けの段階的進行と導入範囲 | 公式URLへの接続がHTTP 403。再調査必須 |
 | 4 | KADOKAWA クトゥルフ神話TRPG公式製品・サポート | 日本語版の現行製品、用語、正誤・補足 | 公式URLへの接続がHTTP 403。再調査必須 |
 
-接続できなかった事実をルール調査完了とは扱わない。公式資料を確認できるまでは、以下を実装対象の責務一覧として使い、数式、閾値、例外、正式用語を確定しない。
+ローカル提供PDF `NewCoC-QS_200228.pdf` 全43ページを `SRC-QS-JA-20200228` として確認し、`implementation/2_requirements/rule_ledger.md`へ採録した。これはQuick-Start範囲の確認を満たすが、同台帳で対象外/要コアルール確認とした項目の完全ルール調査を満たさない。
 
 ### Rule and play-flow coverage
 
@@ -52,6 +52,19 @@
 | Chase | 参加条件、移動、行動、障害、終了条件 | chase skill; MVP採否は質問で確定 |
 | Downtime | 技能成長、治療、幕間、継続探索者 | campaign skillまたはDeferred |
 | Keeper flow | 場面提示、発話/行動/相談の識別、判定要求、結果描写、NPC判断、シーン遷移、中断・再開 | `OUTPUT_AGENTS.md` + checkpoint skill |
+
+### 台帳から実装成果物へ移す責務
+
+| 移送先 | `rule_ledger.md`から移す責務 | 所有してはならない責務 |
+| --- | --- | --- |
+| `coc-investigator-creation` skill | `RUL-CHR-*`, `RUL-DER-*`, `RUL-SKL-*`の質問順、未完項目、出典表示 | 未確認の完全作成表、端数を含む純計算 |
+| `coc-core-resolution` skill | 判定種別選択、難易度/修正理由、プッシュ可否判定、Keeper説明 | 乱数生成、閾値計算、シナリオ秘密 |
+| 戦闘／正気度skills | `RUL-CMB-*`〜`RUL-INS-*`の処理オーケストレーションと停止境界 | 完全銃器/回復/狂気表の推測 |
+| 決定的scripts | 切り捨て閾値、百分率候補選択、成功度、HP／SAN差分、schema検証 | Keeper裁量、物語結果、対象外ルールの既定動作 |
+| fixture | `AC-RUL-04..15`の入力/期待値、ルール／ページ／リスクの追跡 | PDF本文・handoutの転載 |
+| `OUTPUT_AGENTS.md` | 参照元固定、判定前宣言、プッシュ条件、原子的結果適用、対象外時停止、秘匿 | 長大なルール再録、skillだけに存在する恒久規則 |
+
+移送時は台帳IDを安定IDとして保持する。script出力は`design.md`のresolution schemaを満たし、各fixtureからFR、RUL、QS PDFページ、AC、リスクを辿れることをvalidatorで検査する。
 
 ## Skill Architecture
 
@@ -97,7 +110,7 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 ## Implementation Sequence
 
 1. **Rule register:** 公式参照元を再調査し、上表の各処理を確定/暫定/要ルールブックに分類する。
-2. **Schemas and fixtures:** Phase 2のrepository modelを具体的なschema、雛形、ネタバレfixtureへ変換する。
+2. **Schemaとfixture:** Phase 2のrepository modelを具体的なschema、雛形、ネタバレfixtureへ変換する。
 3. **Deterministic core:** validator、ダイス記録、checkpoint整合性など物語判断を含まない処理を実装する。
 4. **Skill drafts:** MVP skillsの`SKILL.md`を作り、入力、参照境界、出力、失敗、ログを揃える。
 5. **Game profile:** 3モード、Keeper進行、NPC自律、ネタバレ防止、scene transactionを`OUTPUT_AGENTS.md`へ反映する。

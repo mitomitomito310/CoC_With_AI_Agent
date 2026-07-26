@@ -111,3 +111,48 @@ YAMLは機械的な検証・更新が必要な状態、Markdownは人間が読�
 - 開発用`AGENTS.md`とゲーム用`OUTPUT_AGENTS.md`を切り替える手順。
 - Keeper参照境界、NPC pipeline、3モード、scene transactionを記載した`OUTPUT_AGENTS.md`更新案。
 - 短編サンプルまたはfixtureと、正常系・漏洩系・再開系の試験入力。
+
+## ルール判定記録（FR-RUL-01..08）
+
+`rule_ledger.md`をQuick-Start範囲の正規索引とする。実行時記録にはルール本文を複製せず、台帳IDと参照ページを保存する。
+
+```yaml
+resolution:
+  id: roll-0001
+  source: {source_id: SRC-QS-JA-20200228, edition: coc7-ja, rule_ids: [RUL-DIF-01], pages: [4, 5], status: verified}
+  input:
+    actor_id: investigator-01
+    intent: "宣言された物語上の方法"
+    check_kind: skill       # 技能 | 能力値 | 幸運 | 対抗 | 近接戦 | 射撃 | 正気度
+    trait: 図書館
+    target_value: 60
+    difficulty: hard        # 通常 | ハード | イクストリーム
+    threshold: 30
+    modifier: {bonus: 1, penalty: 0, net: 1, reasons: [situational-id]}
+    push: {eligible: true, requested: false, changed_approach: null, announced_consequence: null, prohibited_reason: null}
+  dice:
+    source: script           # script生成 | ユーザー入力
+    units: 7
+    tens: [4, 1]
+    candidates: [47, 17]
+    selected: 17
+  result:
+    success_level: hard      # クリティカル | イクストリーム | ハード | 通常 | 失敗 | ファンブル
+    opposed_to: null
+    winner: null
+  proposed_effects: []       # HP／SAN／状態／手掛かりの差分。まだ状態を変更しない
+  application: {validated: false, applied: false, before: {}, after: {}}
+  adjudication: {keeper_choice: null, scenario_ref: null, unresolved: [], core_confirmation_required: false}
+```
+
+### 不変条件と処理順
+
+1. **入力確定:** 行為者、意図、対象、判定種別、技能・能力値、値、物語上の状況を固定する。シナリオ固有指示は一般ルールの参照と分ける。
+2. **難易度・修正:** Keeperはダイスを読む前に難易度と修正理由を確定する。2分の1・5分の1は切り捨てる（`RUL-DER-01`）。ボーナスとペナルティーは相殺するが、全ダイスと全候補を残す（`RUL-MOD-01..02`）。
+3. **ロール・分類:** `00`と一の位`0`の組を100として正規化し、到達した最上位の成功度とクリティカル／ファンブルを求める（`RUL-CHK-01`、`RUL-DIF-02`）。採用値だけを残して分類してはならない。
+4. **比較:** 対抗・近接戦では完成済みの2判定を相互参照する。判定種別ごとの同値規則を適用し、完全同値の対抗判定を推測で解消しない（`RUL-OPP-01`、`RUL-CMB-02`）。
+5. **プッシュ判定:** 失敗後にだけ、対象可否、方法の実質的変更・危険増加、事前に示した追加結果を検証する。戦闘と幸運は拒否する（`RUL-PSH-01..03`）。プッシュは元判定を書き換えず、リンクした新規判定として残す。
+6. **提案・適用:** HP／SAN／状態／手掛かりの差分を`proposed_effects`へ計算し、分岐、境界、シナリオ根拠、確認状態を検証してから`before`／`after`を原子的に書く。`core_confirmation_required`は不可逆な適用を止める。
+7. **参照・ログ:** 参照元ID、台帳ID、PDFページ、シナリオ参照、Keeper判断、未解決事項を保存する。状態確定とネタバレ検査の後にだけ公開描写を生成する。
+
+戦闘記録にはラウンド、DEX順、行動、防御選択、同ラウンドの既防御、武器・ダメージ式、ビルド比較を加える。負傷記録には最大／現在HP、単一攻撃のダメージ、最大HPの2分の1、重大な負傷、CON結果、意識・瀕死状態を加える。正気度記録には喪失式、成功／失敗の枝、喪失ダイス、単一原因の喪失、1日の基準値と累積、INT結果、狂気状態を加える。
