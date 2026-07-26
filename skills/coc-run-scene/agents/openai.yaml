@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Scene Keeper"
+  short_description: "Run a spoiler-safe immersive CoC scene"
+  default_prompt: "Run the current scene while preserving knowledge boundaries."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Investigator Creation"
+  short_description: "Create a sourced CoC investigator sheet"
+  default_prompt: "Guide investigator creation using the active verified rules profile."

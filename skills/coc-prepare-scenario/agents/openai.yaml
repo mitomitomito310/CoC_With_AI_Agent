@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Scenario Preparation"
+  short_description: "Import and validate a spoiler-safe CoC scenario"
+  default_prompt: "Prepare this scenario without exposing Keeper-only information."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Sanity Resolution"
+  short_description: "Resolve sourced Sanity state changes"
+  default_prompt: "Resolve this Sanity check only within verified source capability."

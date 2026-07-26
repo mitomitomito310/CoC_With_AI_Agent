@@ -2,10 +2,10 @@
 
 ## Document Status
 
-- Status: Draft
+- Status: Implementation in progress
 - Phase: 3. Execute (not approved)
-- Scope: skill boundary and repository directory architecture only
-- Working assumptions: the unanswered Phase 3 choices use the recommended baseline `1A / 2A / 3A / 4A`; these assumptions may be revised before approval.
+- Scope: schema、rules profile、scenario lifecycle、deterministic tools、fixture、7 skills、ゲーム用profileの初回実装
+- Confirmed baseline: `1A / 2A（責務に合わせて最適化） / 3A / 4A`。以下のskill境界、ダイス運用、自作fixture方針は実装判断として確定済み。
 
 ## Architecture Decisions
 
@@ -15,6 +15,7 @@
 4. Store skill source in this repository under `skills/`. Activation into a Codex skill directory is a separate, auditable profile-switching step; development never edits a user's globally installed skill in place.
 5. Separate reusable engine data from scenario workspaces. No scenario secret, character state, or session log belongs inside a skill folder.
 6. Prefer a small number of workflow skills with progressively loaded references over one monolith or one skill per dice branch.
+7. Interpret “optimal subdivision” as cohesion-based separation: keep the five orchestration workflows independent, separate combat and Sanity because each owns distinct state transitions and stop conditions, and defer chase/downtime until sourced fixtures justify activation. Do not create a skill for a calculation that belongs in a deterministic tool.
 
 ## Required Skills
 
@@ -185,6 +186,16 @@ scenario workspace ←──────── append/checkpoint ─┘
 - Public output remains safe when Keeper-only file names, clue terms, and semantic leakage canaries are present.
 - Removing all skills still leaves invariant Keeper behavior discoverable in `OUTPUT_AGENTS.md`.
 
-## Open Confirmation
+## Confirmed Implementation Boundary
 
-Before creating the folders and skill files, confirm or revise the working assumptions in `plan.md`: official-source strategy, responsibility-sized skill split, script/user-supplied dice policy, and use of an authored minimal fixture. The architecture above is a reversible draft and does not pass the Execute phase gate.
+Create the seven confirmed skill folders only when their workflow is implemented. Keep chase and downtime deferred, place branch-level arithmetic in shared deterministic tools, accept both script-generated and explicitly supplied physical dice through one resolution-record contract, and use the authored minimal fixture first. This confirmation authorizes iterative implementation but does not pass the Execute phase gate.
+
+## Implemented Increment (2026-07-26)
+
+- Added JSON schemas for scenario, character, knowledge, event, resolution, checkpoint, and rules profile. `scenario.status` has an explicit lifecycle and audit fields.
+- Added the Quick-Start Japanese rules profile with capability gates; full creation, Luck spending, chase, and downtime remain `core_rule_check_required`.
+- Added dependency-free Python tools for D100 components, resolution thresholds/opposed/damage, scenario validation/checksum, scenario transitions, atomic checkpoint projection, and heuristic spoiler scanning.
+- Added an authored minimal scenario fixture and automated tests for lifecycle, checksum integrity, D100 selection, thresholds, opposed checks, damage, checkpoint rollback gates, spoiler canaries, and the shared script/physical resolution contract.
+- Initialized and implemented the seven confirmed skill folders with `SKILL.md` and `agents/openai.yaml`.
+- Replaced the placeholder `OUTPUT_AGENTS.md` with the candidate game profile and added isolated profile-switching/restore instructions.
+- Skill Creator's `quick_validate.py` is currently blocked because the environment lacks PyYAML. Initialization succeeded; a dependency-free structural check is used until that environment limitation is removed.

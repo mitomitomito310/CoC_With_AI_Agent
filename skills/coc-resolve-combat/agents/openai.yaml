@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Combat Resolution"
+  short_description: "Resolve sourced CoC combat and harm"
+  default_prompt: "Resolve this combat exchange with auditable state deltas."
