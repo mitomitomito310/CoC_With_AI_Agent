@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Check Resolution"
+  short_description: "Resolve an auditable percentile check"
+  default_prompt: "Resolve this check and preserve rule and dice provenance."

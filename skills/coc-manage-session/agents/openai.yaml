@@ -1,0 +1,4 @@
+interface:
+  display_name: "CoC Session State"
+  short_description: "Checkpoint pause and resume a CoC session"
+  default_prompt: "Commit or restore this session state atomically."

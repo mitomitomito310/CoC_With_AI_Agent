@@ -1,0 +1,6 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+implementation/3_execute/.active_trial_home
+scenarios/*
+!scenarios/.gitkeep

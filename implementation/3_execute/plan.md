@@ -5,10 +5,10 @@
 - Phase: 3. Execute
 - Status: In progress
 - Approval: Not approved
-- Current question: 草稿化したskill・ディレクトリ設計を前提に、ルール参照の運用、skill分割、ダイス処理、初回fixtureを確定する
+- Current question: なし
 - Recommended option: 1A / 2A / 3A / 4A
-- User answer: Phase 2の回答を反映し、クトゥルフ神話TRPGのルールと進行を公式Web情報から詳しく調査したうえで、必要なskillsを整理して実装計画を作る。作業は細切れのtask-stubにせず、このセッション内で資料へ反映する
-- Next action: `implementation_notes.md` の設計草稿をレビューし、下記4問の回答を受けてから、schema、fixture、validator、補助script/skill、`OUTPUT_AGENTS.md`を小さく実装する
+- User answer: `1A、2A（責務に合わせて最適に細分化）、3A、4A`。公式公開資料を優先して不足箇所だけ所持ルールブックの参照情報で補い、責務別skill、記録可能なscriptと物理ダイス入力、自作の極小fixtureを採用する
+- Next action: 初回実装を拡張し、未実装のSAN/戦闘branch、scenario import、resume投影、AC-RUL-06/08/10..16のfixtureを追加して全受け入れ条件を検証する
 
 ## Phase 2 Handoff
 
@@ -115,36 +115,22 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 ## Phase Exit Checklist
 
 - [ ] 公式参照台帳でMVP対象ルールの版、根拠、確定状態を追跡できる
-- [ ] 原本を変更せず、ユーザーへネタバレせずにscenario workspaceを準備できる
+- [x] 原本を変更せず、ユーザーへネタバレせずにscenario workspaceを準備できる
 - [ ] 探索者作成とMVP対象判定を根拠ログ付きで処理できる
 - [ ] NPC別知識、公開情報、Keeper情報を混ぜずに進行できる
 - [ ] Keeper主導のscene checkpointと明示中止からの再開ができる
-- [ ] 原ログ、checkpoint/current、派生要約の優先順位を検証できる
-- [ ] 恒久ルールが`OUTPUT_AGENTS.md`だけから特定できる
-- [ ] 開発用プロファイルへ安全に戻せる
-- [ ] 実装結果とDeferred scopeを`implementation_notes.md`へ記録する
+- [x] 原ログ、checkpoint/current、派生要約の優先順位を検証できる
+- [x] 恒久ルールが`OUTPUT_AGENTS.md`だけから特定できる
+- [x] 開発用プロファイルへ安全に戻せる
+- [x] 実装結果とDeferred scopeを`implementation_notes.md`へ記録する
 - [ ] ユーザーがExecute成果物を承認する
 
-## Current Questions
+## Confirmed Implementation Choices
 
-1. **公式ルール本文を確認する方法はどれにしますか？**
-   - **A（推奨）:** 公式公開資料を再調査し、不足箇所だけユーザー所持ルールブックの参照箇所・要約で補う。本文はリポジトリへ複製しない。
-   - B: 公式公開資料だけで確認できる範囲をMVPとし、それ以外はDeferredにする。
-   - C: ユーザー提供のルール要約だけを今回の正とする。
-2. **skillの分割単位はどれにしますか？**
-   - **A（推奨）:** 準備、探索者作成、基本判定、Keeper/scene、session stateをMVPの責務単位とし、戦闘・正気度・チェイスを必要に応じて独立させる。
-   - B: 全ルールとKeeper進行を1つのskillへまとめる。
-   - C: 各判定・各状態ごとに細かなskillへ分ける。
-3. **ダイスはどの運用を正としますか？**
-   - **A（推奨）:** リポジトリのscriptが生成・記録し、ユーザーの物理ダイス結果も明示入力なら受け付ける。
-   - B: 常にAI側scriptで振る。
-   - C: 常にユーザーが結果を入力する。
-4. **最初の実装fixtureはどれにしますか？**
-   - **A（推奨）:** 著作権上安全な自作の極小fixtureで、調査、1回の判定、NPC秘密、正気度、scene遷移、中断再開を検証する。
-   - B: ユーザー所持の既存シナリオを最初から使う。
-   - C: 公式Quick-Start収録シナリオを使う（利用条件と本文の扱いを先に確認する）。
-
-推奨案を一括採用する場合は、`1A、2A、3A、4A`と回答できる。
+1. **ルール参照（1A）:** 公式公開資料を再調査し、不足箇所だけユーザー所持ルールブックの参照箇所・要約で補う。本文はリポジトリへ複製しない。
+2. **skill分割（2A・最適化）:** 準備、探索者作成、基本判定、Keeper/scene、session stateを独立したワークフロー責務とする。戦闘と正気度は、固有の状態遷移と停止条件があるため独立させる。チェイスとdowntimeは検証済み資料とfixtureが揃うまでDeferredとし、単純な判定ごとの過剰な細分化はしない。
+3. **ダイス（3A）:** リポジトリのscriptが生成・記録し、ユーザーが明示した物理ダイス結果も同じresolution recordへ記録して受け付ける。
+4. **初回fixture（4A）:** 著作権上安全な自作の極小fixtureで、調査、1回の判定、NPC秘密、正気度、scene遷移、中断再開を検証する。
 
 ## Decisions
 
@@ -154,6 +140,9 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 | 2026-07-25 | 作業のまとめ方 | task-stubへ分割 / このセッションで資料へ反映 | このセッションで資料へ反映 | タスクは分けずにこのセッション内で修正 | Phase 2回答反映とPhase 3計画作成を一括実施 |
 | 2026-07-25 | 公式Web調査の接続結果 | 調査完了 / 未完 | 未完なら明示して根拠を捏造しない | 検索APIはHTTP 401、Chaosium/KADOKAWAへの直接接続はHTTP 403 | 公式確認済みとはせず、再調査を最初の実装ゲートに設定 |
 | 2026-07-26 | 必要skillsとディレクトリ構成 | 単一skill / 責務分割 / 判定別の細分化 | 責務分割 | 設計を依頼。未回答4項目は推奨案を作業仮定にする | 7つのMVP/domain skill、共有rules/schema/tools、隔離scenario workspaceを`implementation_notes.md`へ草稿化 |
+| 2026-07-26 | Phase 3へ進むか | Phase 2承認後に開始 / Phase 2を再修正 | Phase 2承認後に開始 | ステージ2を承認して次のステージに進む | Phase 3の進行意思を再確認。実装前にCurrent Questions 4項目の回答を待つ |
+| 2026-07-26 | Phase 3の実装選択 | 1A〜C / 2A〜C / 3A〜C / 4A〜C | 1A / 2A / 3A / 4A | 1A、2A（最適に細分化）、3A、4A | 公式優先の参照、責務別7 skill、記録可能なscript/物理ダイス、自作極小fixtureを確定 |
+| 2026-07-26 | Phase 3フル実装を開始するか | 初回increment開始 / 設計を継続 | 初回increment開始 | 時間をかけてフル実装を開始 | schema、lifecycle、tools、fixture、7 skills、OUTPUT_AGENTS、profile切替、15 testを初回実装 |
 
 ## Rule-ledger responsibility transfer (2026-07-26)
 
