@@ -2,9 +2,9 @@
 
 ## Current
 
-- フェーズ: 3. Execute（進行中・未承認）
+- フェーズ: 3. Execute（完了・承認済み）
 - 固定方針: 記録駆動AI Keeper、3モード、キャラクター像と個別知識に従う自律NPC、ネタバレなしのシナリオ取込、Keeper主導の没入的なシーン遷移、原ログ不変保持を採用する。秘匿保証は通常チャットと公開ファイルまで。
-- 次: フル拡張済みのSAN・戦闘・回復・探索者・import・resume・authority gateと29 testをレビューし、小規模チャット試験後にExecute承認を確認する。
+- 次: フェーズゲートに従い、この承認処理ではPhase 4を開始しない。別の明示的な続行指示を受けてからTestingの初回質問を提示する。
 
 ## History
 
@@ -40,6 +40,7 @@
 | 2026-07-26 | 3. Execute | 実装判断を1A/2A最適化/3A/4Aで確定。5つのworkflowと戦闘・正気度を分離し、判定別skill化は避け、chase/downtimeはDeferredとする。 | Q: ルール参照、skill分割、ダイス、fixture。A: 1A、2A最適に細分化、3A、4A。 | schema、script/skill、OUTPUT_AGENTSを反復実装 |
 | 2026-07-26 | 3. Execute | フル実装の初回incrementを開始。scenario lifecycle/schema、Quick-Start profile、決定論tools、原子的checkpoint、自作fixture、7 skills、ゲームprofile、切替手順と15 testを実装。 | Q: 時間をかけてフル実装開始。A: 実装開始。 | SAN/戦闘/import/resumeと残るAC fixtureを拡張 |
 | 2026-07-26 | 3. Execute | 残作業をフル拡張。SAN、戦闘、回復、探索者計算、push/authority gate、非上書きimport、秘匿別resume、checkpoint強化とAC-RUL-06/08/10..16を含む29 testを実装。 | Q: 次に必要な作業をフル実装。A: 決定論tool/schema/fixture/skill資料まで反映。 | 成果物レビューと小規模チャット試験 |
+| 2026-07-26 | 3. Execute | Execute成果物が承認されたため、Phase 3の基準線を確定。ユーザーはPhase 4への進行意思も表明したが、承認コメント後は次フェーズを同時開始しないゲートを適用。 | Q: Execute承認とPhase 4進行。A: 承認、フェーズ4に進む。 | 別の明示的な続行指示後にPhase 4開始質問を提示 |
 
 ## 記録ルール
 
