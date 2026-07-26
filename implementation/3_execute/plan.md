@@ -3,12 +3,12 @@
 ## Status
 
 - Phase: 3. Execute
-- Status: In progress
-- Approval: Not approved
+- Status: Completed
+- Approval: Approved by user on 2026-07-26
 - Current question: なし
 - Recommended option: 1A / 2A / 3A / 4A
 - User answer: `1A、2A（責務に合わせて最適に細分化）、3A、4A`。公式公開資料を優先して不足箇所だけ所持ルールブックの参照情報で補い、責務別skill、記録可能なscriptと物理ダイス入力、自作の極小fixtureを採用する
-- Next action: 実装済みのSAN/戦闘/回復/import/resume/authority gateと29 testを成果物レビューし、ゲームプロファイルで小規模チャット試験を行った後、Execute承認を確認する
+- Next action: Execute成果物の承認確定済み。フェーズゲートに従い、別の明示的な続行指示を受けてからPhase 4 Testingを開始する
 
 ## Phase 2 Handoff
 
@@ -123,7 +123,7 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 - [x] 恒久ルールが`OUTPUT_AGENTS.md`だけから特定できる
 - [x] 開発用プロファイルへ安全に戻せる
 - [x] 実装結果とDeferred scopeを`implementation_notes.md`へ記録する
-- [ ] ユーザーがExecute成果物を承認する
+- [x] ユーザーがExecute成果物を承認する
 
 ## Confirmed Implementation Choices
 
@@ -143,6 +143,7 @@ skillsは手順と文脈のまとまり、scriptsは同じ入力に同じ結果�
 | 2026-07-26 | Phase 3へ進むか | Phase 2承認後に開始 / Phase 2を再修正 | Phase 2承認後に開始 | ステージ2を承認して次のステージに進む | Phase 3の進行意思を再確認。実装前にCurrent Questions 4項目の回答を待つ |
 | 2026-07-26 | Phase 3の実装選択 | 1A〜C / 2A〜C / 3A〜C / 4A〜C | 1A / 2A / 3A / 4A | 1A、2A（最適に細分化）、3A、4A | 公式優先の参照、責務別7 skill、記録可能なscript/物理ダイス、自作極小fixtureを確定 |
 | 2026-07-26 | Phase 3フル実装を開始するか | 初回increment開始 / 設計を継続 | 初回increment開始 | 時間をかけてフル実装を開始 | schema、lifecycle、tools、fixture、7 skills、OUTPUT_AGENTS、profile切替、15 testを初回実装 |
+| 2026-07-26 | Execute成果物を承認するか | 承認 / 修正継続 | 承認 | 承認、フェーズ4に進む | Phase 3を承認済みとして確定。フェーズゲートに従い、この作業ではPhase 4を開始せず、別の続行指示を待つ |
 
 ## Rule-ledger responsibility transfer (2026-07-26)
 
