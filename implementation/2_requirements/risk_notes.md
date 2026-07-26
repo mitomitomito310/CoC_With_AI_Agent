@@ -20,6 +20,10 @@
 | R-12 | 要約が原ログと乖離し、誤った状態で再開する | High | summaryとcheckpointの事実が競合する | checkpoint/currentを正、summaryを再生成可能な派生物とする | AC-STA-03..04 |
 | R-13 | 準備時の確認や構造化報告が結末を漏らす | Critical | 開始前応答に黒幕、結末、未発見手掛かりが現れる | 構造化はKeeper専用とし、ユーザーには開始可否と入力不足だけを返す | AC-SCN-02 |
 | R-14 | シーン区切りや保存確認が物語を頻繁に中断する | High | 場面転換ごとに確認待ちになる | Keeperが内部的に境界を決め、短い通知後に自動継続する | AC-STA-06 |
+| R-15 | クイックスタートを完全版または不特定の「最新版」と誤表示する | Critical | PDFにないSAN等の処理を断定する | rules profileと完全性を台帳化し、未収載処理は`unsupported_by_active_source`にする | AC-RUL-04 |
+| R-16 | ボーナス/ペナルティ、対抗、戦闘の役割別規則を成功/失敗へ過度に単純化する | High | 生ダイスや回避/応戦の区別が残らない | 生ダイス、役割、同値、武器種、修正理由をroll logへ保存する | AC-RUL-05 |
+| R-17 | SAN・重傷・瀕死・治療・MP・成長の時間状態が再開時に失われる | Critical | current値だけで発生時刻・状態フラグがない | 可変trackと期限をcheckpoint化し、複合fixtureで再開検証する | AC-RUL-06 |
+| R-18 | シナリオ構造化で読み上げ文、Keeper注意、手掛かり条件を混同する | Critical | 秘匿文の公開、または手掛かりの無条件開示 | 型付きscenario index、原本locator、秘匿区分、開示状態を必須にする | AC-SCN-02、AC-INF-01 |
 
 ## Residual Design Decisions
 

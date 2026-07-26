@@ -38,11 +38,31 @@ scenarios/<scenario_id>/
 │       └── summary.md         # 再開・長編参照用の派生要約
 └── session/
     ├── rules.yaml             # 対象版、利用可能な参照元、暫定裁定
+    ├── rules_ledger.yaml      # profile、文書、ページ/節、対応範囲、完全性
     ├── current.yaml           # 現在シーン、時刻、場所、参加者、状態版
     └── resume.md              # 次回開始に必要な公開・Keeper別要約
 ```
 
 YAMLは機械的な検証・更新が必要な状態、Markdownは人間が読む原文・説明・ログに使う。具体的なschemaとテンプレートはExecuteで作る。
+
+## Rules Profiles and Resolution
+
+`rules.yaml`は表示名だけでなく、現在の`rules_profile`を持つ。最初のfixtureでは`quick_start_7e`を使用する。完全版を参照できる場合だけ別プロファイル`full_7e`を作り、クイックスタートの不足を記憶で補わない。処理順は次のとおりとする。
+
+1. 要求されたメカニクスを`rules_ledger.yaml`から検索する。
+2. 有効profileに根拠があれば、ページ/節をroll logへ固定する。
+3. 根拠がなければ`unsupported_by_active_source`を返す。
+4. 可逆で軽微なら、明示した`house_rule`として暫定裁定を別記録できる。死亡、重大なSAN変化、キャラクター喪失など不可逆な場合は確定前に確認する。
+
+roll logは閾値と最終結果だけでなく、生の1の位・全10の位、採用値、修正理由、成功度、対抗時の役割、同値規則、プッシュと事前提示した失敗結果、状態差分を保持する。これによりボーナス/ペナルティや近接の「回避」と「応戦」の異なる同値処理を再計算できる。
+
+Character sheetは、能力値・技能・バックストーリーなどの安定データと、HP/SAN/MP/Luck、重傷、意識、瀕死/安定、狂気状態、成長印、回復時刻などの可変状態を分ける。シーンcheckpointは可変状態を原子的に更新する。
+
+詳細なPDF調査範囲と実装フィールドの根拠は`rules_reference_notes.md`を参照する。
+
+## Scenario Content Model
+
+シナリオ取込時は、単なる章要約ではなく、`scene/location`、`public_description`、`read_aloud`、`keeper_truth`、`clue`、`handout`、`prerequisite`、`roll`、`push_consequence`、`elapsed_time`、`actor_reaction`、`hazard`、`combat_or_spell`、`transition`、`ending_or_reward`へ型付けする。各項目は原本locator、秘匿区分、開示状態を持つ。一本道を仮定せず、場所・調査順の分岐と再合流を表現する。
 
 ## Information Access Matrix
 
