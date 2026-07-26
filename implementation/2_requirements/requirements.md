@@ -90,3 +90,16 @@ Requirements/Designを承認する前に、次を満たす必要がある。
 3. 未決事項が実装者のゲーム方針判断を必要としない状態になっている。
 4. フォルダ・ファイル責務、読取境界、更新順序、失敗時の扱いが定義されている。
 5. Executeで作るテンプレート、script/skill候補、`OUTPUT_AGENTS.md`規則が列挙されている。
+
+## Verified Quick-Start Rules Baseline (2026-07-26 addendum)
+
+The detailed source of truth is [`rule_ledger.md`](rule_ledger.md). This addendum narrows and details the existing FR-RUL baseline without changing Phase 2 approval state.
+
+- **FR-RUL-01 (RUL-CHR-01..02, RUL-DRV-01..03, RUL-SKL-01..04):** Support the verified five-step Quick-Start creation path only: fixed characteristic array, floored half/fifth values, derived-value formulas/table, fixed occupation allocations, four personal-interest increases, concise backstory and final fields. Mark campaign finances and unlisted creation options as outside Quick-Start.
+- **FR-RUL-02 (RUL-RES-01..03, RUL-MOD-01, RUL-OPP-01, RUL-LCK-01):** Record raw D100 components/candidates, selected result, threshold values, success level, difficulty, modifier cancellation/selection, opposed participant values/tie-break, and source page. Equality at a threshold succeeds.
+- **FR-RUL-03 (RUL-PSH-01..02, RUL-SCOPE-01..05):** A push requires an initial failure, a justified changed approach, Keeper permission, one reroll, and a declared/recorded escalated consequence. Combat cannot be pushed. Missing rules set `core_rule_check_required`; no inferred completion is permitted.
+- **FR-RUL-04 (all ledger IDs):** Skills/scripts may encode only ledger-confirmed deterministic operations. `OUTPUT_AGENTS.md` owns invariant Keeper behavior and the no-inference/source-record rule; scenario-local mechanics remain scenario data.
+- **FR-RUL-05 (RUL-CMB-01..05, RUL-DMG-01..03):** Resolve Quick-Start combat in DEX order, preserve the distinct fight-back/dodge tie rules, apply firearm/maneuver/outnumbered modifiers, and calculate damage/Extreme damage only for confirmed weapon categories.
+- **FR-RUL-06 (RUL-INJ-01, RUL-HEAL-01..02):** Apply HP floor, major-wound threshold, immediate-death strict comparison, consciousness/dying branches, stabilization, and natural/First Aid/Medicine healing in the recorded order.
+- **FR-RUL-07 (RUL-SAN-01..03, RUL-INS-01..02):** Apply SAN success/failure loss, single-roll 5+ loss INT branch, temporary-insanity duration/bout/state changes, Reality Check, and only the recovery rules explicitly present. Flag the complete SAN system as requiring core rules.
+- **FR-RUL-08 (RUL-KPR-01..02, RUL-SCN-01..03):** Separate universal Quick-Start procedures from Keeper discretion and `scenario_id`-scoped mechanics; never expose or promote pp.21–39 spoiler data as a generic rule.
